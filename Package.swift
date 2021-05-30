@@ -4,15 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Networking",
-    platforms: [ .iOS(.v13) ],
+    name: "RoutingResolver",
+    platforms: [ .iOS(.v9), .tvOS(.v9)],
     products: [
-        .library(name: "NetworkingStatic", targets: ["Networking"]),
-        .library(name: "Networking", type: .dynamic, targets: ["Networking"])
+        .library(name: "RoutingResolver", targets: ["RoutingResolver"])
     ],
     targets: [
-        .target(name: "Networking",
-                path:"Sources",
-                exclude: ["Info.plist"])
+        .target(name: "RoutingResolver", path: "Sources", exclude: ["Info.plist"])
     ]
 )

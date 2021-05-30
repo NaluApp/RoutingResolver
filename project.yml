@@ -1,22 +1,54 @@
-include:
-  - configuration.yml
-name: Networking
+name: RoutingResolver
+options:
+  bundleIdPrefix: "com.mobile.sound"
+  xcodeVersion: "12.4"
+  deploymentTarget:
+    iOS: "13.0"
+  createIntermediateGroups: true
+  tabWidth: 4
+  minimumXcodeGenVersion: "2.23.1"
 targets:
-  Networking:
+  RoutingResolver:
     type: framework
     platform: iOS
     sources: ./Sources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.mobile.sound.soundapp.networking
-        OTHER_LDFLAGS: $(inherited) -ObjC
+        SDKROOT: "iphoneos"
+        VERSIONING_SYSTEM: "apple-generic"
+        CURRENT_PROJECT_VERSION: "1.0"
+        SWIFT_VERSION: "5.4"
+        DEBUG_INFORMATION_FORMAT: "dwarf-with-dsym"
+        PRODUCT_BUNDLE_IDENTIFIER: com.mobile.sound.soundapp.dev.networking
+        BUILD_LIBRARY_FOR_DISTRIBUTION: YES
+        SKIP_INSTALL: NO
+    configs:
+      Debug:
+        DEBUG: "1"
+        ENABLE_BITCODE: NO
+        ONLY_ACTIVE_ARCH: YES
+        ENABLE_TESTABILITY: YES
+        GCC_SYMBOLS_PRIVATE_EXTERN: NO
+        ASSETCATALOG_COMPILER_OPTIMIZATION: "time"
+        OTHER_SWIFT_FLAGS: $(inherited) -Xfrontend -no-serialize-debugging-options -Onone -enable-batch-mode
+      Release:
+        DEBUG: "0"
+        ENABLE_BITCODE: YES
+        SWIFT_OPTIMIZATION_LEVEL: "-Osize"
+        SWIFT_COMPILATION_MODE: "wholemodule"
+        ASSETCATALOG_COMPILER_OPTIMIZATION: "space"
+        OTHER_SWIFT_FLAGS: $(inherited) -Xfrontend -no-serialize-debugging-options
     scheme:
       testTargets:
-        - NetworkingTests
-  NetworkingTests:
+        - RoutingResolverTests
+    postBuildScripts:
+      - path: ./Scripts/swiftlint.sh
+        name: Swiftlint
+        shell: "/bin/sh"
+  RoutingResolverTests:
     type: bundle.unit-test
     platform: iOS
     sources: ./Tests
     settings:
-      PRODUCT_NAME: "NetworkingTests"
-      TEST_TARGET_NAME: "NetworkingTests"
+      PRODUCT_NAME: "RoutingResolverTests"
+      TEST_TARGET_NAME: "RoutingResolverTests"

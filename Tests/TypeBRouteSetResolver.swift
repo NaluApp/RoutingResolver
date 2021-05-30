@@ -8,27 +8,25 @@
 import RoutingResolver
 import UIKit
 
-enum TypeARoute: Route {
+enum TypeBRoute: Route {
     case sampleA
     case sampleB
 }
 
-final class TypeARouteSetResolver: RouteSetResolver {
-    static var set: [Route.Type] {
-        [TypeARoute.self]
-    }
+final class TypeBRouteSetResolver: RouteSetResolver {
+    static var set: [Route.Type] { [TypeBRoute.self] }
 
     func resolve(_ route: Route) -> UIViewController? {
-        switch route as? TypeARoute {
+        switch route as? TypeBRoute {
         case .sampleA:
-            return DummySampleATypeAViewController()
+            return DummySampleATypeBViewController()
         case .sampleB:
-            return DummySampleBTypeAViewController()
+            return DummySampleBTypeBViewController()
         default:
             return nil
         }
     }
 }
 
-final class DummySampleATypeAViewController: UIViewController {}
-final class DummySampleBTypeAViewController: UIViewController {}
+final class DummySampleATypeBViewController: UIViewController {}
+final class DummySampleBTypeBViewController: UIViewController {}
