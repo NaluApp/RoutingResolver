@@ -1,0 +1,15 @@
+.DS_Store
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+.swiftpm/
+*.sh
+built-product/
+build/
+*-Compiled/
+
+configuration.yml
+dependencies.yml
+compiled_dependencies.yml
+Package.resolved

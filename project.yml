@@ -1,0 +1,22 @@
+include:
+  - configuration.yml
+name: Networking
+targets:
+  Networking:
+    type: framework
+    platform: iOS
+    sources: ./Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.mobile.sound.soundapp.networking
+        OTHER_LDFLAGS: $(inherited) -ObjC
+    scheme:
+      testTargets:
+        - NetworkingTests
+  NetworkingTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: ./Tests
+    settings:
+      PRODUCT_NAME: "NetworkingTests"
+      TEST_TARGET_NAME: "NetworkingTests"
