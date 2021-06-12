@@ -19,9 +19,9 @@ public final class RoutingResolver {
     /// Resolves the route into a UIViewController
     /// - Parameter route: Route to be resolved
     /// - Returns: resolved UIViewController
-    public func resolve<T: Route>(route: T) -> UIViewController? {
+    public func resolve(route: Route) -> UIViewController? {
         registrationCheck()
-        let resolver = RoutingResolver.mapping[T.identifier]
+        let resolver = RoutingResolver.mapping[type(of: route).identifier]
         assert(resolver != nil, "No resolver can solve this route: \(route)")
         let destination = resolver?.init().resolve(route)
         assert(destination != nil,
