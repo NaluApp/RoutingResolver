@@ -19,9 +19,9 @@ public final class RoutingResolver {
     /// Resolves the route into a UIViewController
     /// - Parameter route: Route to be resolved
     /// - Returns: resolved UIViewController
-    public func resolve(route: Route) -> UIViewController? {
+    public func resolve<T: Route>(route: T) -> UIViewController? {
         registrationCheck()
-        let resolver = RoutingResolver.mapping[type(of: route).identifier]
+        let resolver = RoutingResolver.mapping[T.identifier]
         assert(resolver != nil, "No resolver can solve this route: \(route)")
         let destination = resolver?.init().resolve(route)
         assert(destination != nil,
@@ -34,7 +34,7 @@ public final class RoutingResolver {
     ///   - route: Route to register
     ///   - resolver: Resolver which will resolve the route
     public static func register(_ route: Route.Type, _ resolver: RouteSetResolver.Type) {
-        let routeIdentifier = String(describing: route)
+        let routeIdentifier = route.identifier
         assert(mapping[routeIdentifier] == nil, "Two resolvers cannot resolve the same route")
         mapping[routeIdentifier] = resolver
     }
